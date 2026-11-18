@@ -18,6 +18,8 @@ Type paths are fixed across locales. Localize titles, meta descriptions and main
 
 ## S02 · Discovery and freshness
 
+The [publication contract](08-publication-contract.md) owns HTTP, CTA, sitemap and Greenpage decisions for listings.
+
 Return working HTTPS 200 pages with meaningful main content and same essential mobile and desktop HTML. Set canonical URLs to the intended host and emit reciprocal hreflang only between genuine localized equivalents. Use a neutral x-default only for a real fallback destination. Do not redirect explicit locale or scope URLs from IP or device preferences. Unapproved or unknown public routes return 404. A temporarily suspended profile has a useful status page with noindex and no broken Telegram CTA. A permanently removed entry returns 410 or 404 when a distinguishable tombstone is inappropriate. Public filter/search pages that use noindex must remain crawlable enough to read that directive. Authentication protects private content.
 
 Publish only canonical, eligible URLs in sitemap XML. Group sitemap files by locale/type when useful. Use accurate lastmod from material content or link changes. Link and stat probes alone do not update lastmod. Invalidate impacted hubs and locales on change. Submit initial sitemap through Google Search Console and Bing Webmaster Tools at setup. Batch IndexNow updates for participating engines after origin state is visible. Do not apply Google Indexing API to directory pages.

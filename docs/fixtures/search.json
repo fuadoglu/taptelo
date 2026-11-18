@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "clock": "2026-11-18T12:00:00Z",
+  "aliases": {
+    "city": {"baki": "baku", "bakida": "baku", "баку": "baku"},
+    "category": {"kirayə": "rentals", "kiraye": "rentals", "rental": "rentals"},
+    "topic": {"i̇t": "it", "it": "it"}
+  },
+  "listings": [
+    {"id": "ch-101", "kind": "channels", "username": "fixture_baku_kiraye", "title": "Bakı Kirayə", "summary": "Bakıda kirayə mənzillər", "country": "AZ", "city": "baku", "language": "az", "category": "rentals", "topics": [], "publication": "published"},
+    {"id": "ch-102", "kind": "channels", "username": "fixture_baku_arenda", "title": "Баку Аренда", "summary": "Аренда квартир в Баку", "country": "AZ", "city": "baku", "language": "ru", "category": "rentals", "topics": [], "publication": "published"},
+    {"id": "ch-103", "kind": "channels", "username": "fixture_ganja_kiraye", "title": "Gəncə Kirayə", "summary": "Gəncədə kirayə mənzillər", "country": "AZ", "city": "ganja", "language": "az", "category": "rentals", "topics": [], "publication": "published"},
+    {"id": "ch-104", "kind": "channels", "username": "fixture_baku_it", "title": "Bakı İT Vakansiyaları", "summary": "Bakıda proqramlaşdırma üzrə vakansiyalar", "country": "AZ", "city": "baku", "language": "az", "category": "jobs", "topics": ["it"], "publication": "published"},
+    {"id": "gr-201", "kind": "groups", "username": "fixture_baku_rent_group", "title": "Bakı Kirayə Qrupu", "summary": "Kirayə müzakirələri", "country": "AZ", "city": "baku", "language": "az", "category": "rentals", "topics": [], "publication": "published"},
+    {"id": "bo-301", "kind": "bots", "username": "fixture_pdf_en_bot", "title": "PDF Converter", "summary": "Convert PDF pages to JPG", "country": "GB", "city": null, "language": "en", "category": "pdf", "topics": [], "publication": "published"},
+    {"id": "ch-105", "kind": "channels", "username": "fixture_private_draft", "title": "Bakı Kirayə Yeni", "summary": "Pending fixture", "country": "AZ", "city": "baku", "language": "az", "category": "rentals", "topics": [], "publication": "draft"}
+  ],
+  "cases": [
+    {"id": "SEARCH-01", "query": "Bakıda kirayə", "kind": "channels", "country": "AZ", "language": null, "inferred": {"city": "baku", "category": "rentals"}, "ordered_prefix": ["ch-101", "ch-102"], "excluded": ["ch-103", "gr-201", "ch-105"]},
+    {"id": "SEARCH-02", "query": "baki kiryae", "kind": "channels", "country": "AZ", "language": "az", "ordered_prefix": ["ch-101"], "excluded": ["ch-102", "ch-105"]},
+    {"id": "SEARCH-03", "query": "@fixture_pdf_en_bot", "kind": "channels", "country": "AZ", "language": "az", "exact_result": "bo-301", "filters_retained": true},
+    {"id": "SEARCH-04", "query": "https://t.me/FIXTURE_PDF_EN_BOT", "kind": "channels", "country": "AZ", "language": null, "exact_result": "bo-301", "filters_retained": true},
+    {"id": "SEARCH-05", "query": "Баку kiraye", "kind": "channels", "country": "AZ", "language": "ru", "inferred": {"city": "baku", "category": "rentals"}, "ordered_prefix": ["ch-102"], "excluded": ["ch-101", "ch-105"]},
+    {"id": "SEARCH-06", "query": "İT", "kind": "channels", "country": "AZ", "language": null, "ordered_prefix": ["ch-104"]},
+    {"id": "SEARCH-07", "query": "Bakıda kirayə", "kind": "channels", "country": "AZ", "language": "en", "total": 0, "fallback": {"remove_filter": "language", "total": 2}, "filters_retained": true},
+    {"id": "SEARCH-08", "query": "@fixture_private_draft", "kind": "channels", "country": "AZ", "language": null, "total": 0, "excluded": ["ch-105"]},
+    {"id": "SEARCH-09", "query": "Bakıda kirayə", "kind": "groups", "country": "AZ", "language": "az", "ordered_prefix": ["gr-201"], "excluded": ["ch-101", "ch-102"]}
+  ]
+}

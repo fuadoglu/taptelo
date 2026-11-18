@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Taptelo — ekran atlası</title>
+<style>
+:root{color-scheme:light;--canvas:#f7faf9;--surface:#fff;--ink:#15221f;--muted:#52635f;--accent:#006b5b;--selected:#e7f5f0;--line:#dce5e2}
+*{box-sizing:border-box}
+body{margin:0;background:var(--canvas);color:var(--ink);font:1rem/1.5 system-ui,sans-serif}
+main{max-width:77.5rem;margin:auto;padding:1rem}
+h1,h2,h3,p{margin:0}
+h1{font-size:1.6rem}
+h2{font-size:1.2rem;margin-bottom:.5rem}
+h3{font-size:1rem}
+p,small{overflow-wrap:anywhere}
+section{margin-block:1.25rem}
+.lead,.meta{color:var(--muted)}
+.meta{font-size:.82rem}
+.frame{background:var(--surface);border:1px solid var(--line);border-radius:.75rem;overflow:hidden}
+.bar,.tabs,.bottom,.actions,.chips{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.bar,.tabs,.bottom{padding:.5rem .75rem;border-bottom:1px solid var(--line)}
+.bar{justify-content:space-between}
+.search{flex:1;min-width:12rem}
+.bar strong{font-size:1.18rem}
+.btn,input,select{font:inherit;min-height:44px;background:#fff;border:1px solid #81938d;color:var(--ink);border-radius:.55rem;padding:.4rem .65rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;cursor:pointer;font-weight:600}
+.btn.outline{color:var(--accent);border-color:var(--accent)}
+.btn.primary{color:white;background:var(--accent);border-color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.tab{border:0;border-radius:0;border-bottom:2px solid transparent;padding-inline:.75rem}
+.active{border-bottom-color:var(--accent);color:var(--accent)}
+[hidden]{display:none!important}
+.mobile-only{display:none}
+.results-layout{display:grid;grid-template-columns:15rem minmax(0,1fr)}
+.filters{padding:1rem;border-right:1px solid var(--line);display:grid;align-content:start;gap:.65rem}
+.filters label,.field{display:grid;gap:.3rem}
+.results,.panel{padding:1rem;display:grid;gap:.65rem;min-width:0}
+.chip,.badge{display:inline-block;border-radius:.4rem;background:var(--selected);color:var(--accent);padding:.25rem .5rem;font-size:.82rem}
+.chip{min-height:44px;display:inline-flex;align-items:center}
+.card{border:1px solid var(--line);padding:.75rem;border-radius:.65rem;display:grid;grid-template-columns:2.5rem minmax(0,1fr) auto;gap:.65rem;align-items:center}
+.card p{font-size:.88rem}
+.avatar{background:var(--selected);color:var(--accent);width:2.5rem;height:2.5rem;display:grid;place-items:center;border-radius:.55rem;font-weight:700}
+.note{background:var(--canvas);padding:.65rem;border-radius:.5rem}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+dialog{width:min(100% - 1rem,31rem);border:1px solid var(--line);border-radius:.75rem;padding:0;color:var(--ink)}
+dialog::backdrop{background:#15221f90}
+.bottom{justify-content:space-around;border-top:1px solid var(--line);border-bottom:0}
+@media(max-width:760px){
+ .mobile-only{display:initial}
+ .desktop-only,.filters{display:none}
+ .search{order:3;min-width:100%;min-height:44px}
+ .results-layout,.split{grid-template-columns:minmax(0,1fr)}
+ .tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding-inline:.4rem}
+ .tab{padding-inline:.2rem}
+ .results,.panel{padding:.75rem}
+ .card{grid-template-columns:2.5rem minmax(0,1fr);align-items:start}
+ .card>.actions{grid-column:2}
+ .bottom.mobile-only{display:flex;padding-inline:.3rem;gap:.25rem}
+ .bottom .btn{font-size:.85rem;padding-inline:.4rem}
+ dialog{margin:auto auto .4rem}
+}
+</style>
+</head>
+<body>
+<main>
+<h1>Taptelo ekran atlası</h1>
+<p class="lead">Mobil və masaüstü düzülüş eyni nümunələrdə göstərilir. Kartlardakı məlumat sintetikdir. Filtr nümunəsi interaktivdir, Telegram və admin əməliyyatları vizual nümunədir.</p>
+
+<section id="browse">
+<h2>01 · Kataloq və axtarış</h2>
+<div class="frame">
+  <div class="bar"><strong>Taptelo</strong><input class="search" aria-label="Ad, mövzu və ya Telegram linki" value="Bakıda kirayə"><span class="actions"><button class="btn" type="button">Azərbaycan ▾</button><button type="button" class="btn desktop-only">AZ ▾</button><a class="btn desktop-only" href="#submit">Əlavə et</a><button type="button" class="btn mobile-only" aria-label="Menyu">☰</button></span></div>
+  <nav class="tabs" aria-label="Kataloq bölmələri"><a href="#browse" aria-current="page" class="btn tab active">Kanallar</a><button type="button" class="btn tab">Qruplar</button><button type="button" class="btn tab">Botlar</button></nav>
+  <div class="results-layout">
+    <aside class="filters" aria-label="Masaüstü filtrləri"><strong>Filtrlər</strong><label>Kateqoriya<select><option>Kirayə elanları</option></select></label><label>Məzmun dili<select><option>Bütün dillər</option></select></label><small class="meta">2 nəticə</small></aside>
+    <div class="results">
+      <div class="chips"><button type="button" class="btn mobile-only" data-open-filter>Filtrlər</button><span class="chip">Bakı ×</span><span class="chip">Kirayə elanları ×</span><button type="button" class="btn" id="active-language" hidden>Rusca ×</button></div>
+      <article class="card" id="az-result"><span class="avatar" aria-hidden="true">BK</span><div><h3><a href="#profile">Bakı Kirayə</a></h3><p>Bakıda kirayə mənzil elanları.</p><small class="meta">Azərbaycanca · Kanal</small></div><div class="actions"><button type="button" class="btn outline">Kanalı aç ↗</button></div></article>
+      <article class="card"><span class="avatar" aria-hidden="true">БА</span><div><h3>Баку Аренда</h3><p>Bakıda rus dilində mənzil elanları.</p><small class="meta">Rusca · Kanal</small></div><div class="actions"><button type="button" class="btn outline">Kanalı aç ↗</button></div></article>
+    </div>
+  </div>
+  <nav class="bottom mobile-only" aria-label="Əsas menyu"><a class="btn" href="#browse">Kəşf et</a><button type="button" class="btn">Saxlanılanlar</button><a class="btn" href="#submit">Əlavə et</a></nav>
+</div>
+</section>
+
+<section id="empty">
+<h2>02 · Nəticə yoxdur</h2>
+<div class="frame panel"><div class="chips"><span class="chip">Bakı ×</span><span class="chip">Kirayə elanları ×</span><span class="chip">İngiliscə ×</span></div><h3>Bu seçimlərlə nəticə tapılmadı</h3><div class="actions"><a href="#browse" class="btn outline">İngiliscə filtrini götür · 2 nəticə</a></div></div>
+</section>
+
+<section id="profile">
+<h2>03 · Profil və müvəqqəti dayandırılma</h2>
+<div class="split">
+ <article class="frame panel"><small class="meta">Kanallar / Kirayə elanları</small><span class="avatar" aria-hidden="true">BK</span><h3>Bakı Kirayə</h3><p>Bakıda kirayə mənzil elanları.</p><div class="actions"><button type="button" class="btn primary">Telegram-da aç ↗</button><button type="button" class="btn">Saxla</button></div><small class="meta">Azərbaycanca · Son yoxlama: nümunə tarix</small><button type="button" class="btn outline">Problem bildir</button></article>
+ <article class="frame panel"><h3>Profil müvəqqəti əlçatan deyil</h3><p>Telegram keçidi yenidən yoxlanılır.</p><div class="actions"><a class="btn outline" href="#browse">Kataloqa qayıt</a></div></article>
+</div>
+</section>
+
+<section id="submit">
+<h2>04 · Əlavəetmə və Telegram cavabı gəlməyəndə</h2>
+<div class="split">
+ <div class="frame panel"><label class="field">Telegram linki<input value="t.me/fixture_baku_kiraye"></label><label class="field">Kateqoriya<select><option>Kirayə elanları</option></select></label><label class="field">Məzmun dili<select><option>Azərbaycanca</option></select></label><label class="field">Auditoriya ölkəsi<select><option>Azərbaycan</option><option>Ölkəyə bağlı deyil</option></select></label><button type="button" class="btn primary">Admin baxışına göndər</button></div>
+ <div class="frame panel"><span class="badge">Əl ilə yoxlanacaq</span><h3>Önizləməni indi almaq mümkün olmadı</h3><p>Linki saxladıq. Məlumatı tamamlayıb admin baxışına göndərə bilərsən.</p><p class="note">Göndərdikdən sonra: <strong>Admin baxışındadır</strong> · Özəl status linkini kopyala.</p></div>
+</div>
+</section>
+
+<section id="moderation">
+<h2>05 · Admin baxışı</h2>
+<div class="split">
+ <div class="frame panel"><h3>Gözləyən müraciət</h3><p>Kateqoriya, dil və ölkə üzrə təqdimat məlumatı.</p><div class="actions"><button type="button" class="btn outline">Telegram-da yoxla</button></div></div>
+ <div class="frame panel"><h3>İctimai önizləmə</h3><p class="meta">Yayım təsdiqindən sonra görünəcək.</p><div class="actions"><button type="button" class="btn primary">Təsdiqlə və yayımla</button><button type="button" class="btn">Düzəliş et</button><button type="button" class="btn">Rədd et</button></div></div>
+</div>
+</section>
+
+<dialog id="filter-sheet" aria-labelledby="filter-title">
+ <form method="dialog" class="panel">
+  <h2 id="filter-title">Filtrlər</h2>
+  <label class="field">Kateqoriya<select><option>Kirayə elanları</option></select></label>
+  <label class="field">Məzmun dili<select id="filter-language"><option>Bütün dillər</option><option>Rusca</option></select></label>
+  <div class="actions"><button class="btn" value="cancel">Bağla</button><button class="btn primary" id="filter-apply" value="apply">2 nəticəni göstər</button></div>
+ </form>
+</dialog>
+</main>
+<script>
+const sheet = document.querySelector('#filter-sheet');
+const language = document.querySelector('#filter-language');
+const apply = document.querySelector('#filter-apply');
+const activeLanguage = document.querySelector('#active-language');
+const azResult = document.querySelector('#az-result');
+let appliedLanguage = 0;
+let trigger;
+function updateCount() {
+  apply.textContent = language.selectedIndex === 0 ? '2 nəticəni göstər' : '1 nəticəni göstər';
+}
+function updateResults() {
+  activeLanguage.hidden = appliedLanguage === 0;
+  azResult.hidden = appliedLanguage !== 0;
+}
+activeLanguage.addEventListener('click', () => {
+  appliedLanguage = 0;
+  updateResults();
+  document.querySelector('[data-open-filter]').focus();
+});
+document.querySelector('[data-open-filter]').addEventListener('click', event => {
+  trigger = event.currentTarget;
+  sheet.returnValue = '';
+  language.selectedIndex = appliedLanguage;
+  updateCount();
+  sheet.showModal();
+});
+language.addEventListener('change', updateCount);
+sheet.addEventListener('close', () => {
+  if (sheet.returnValue === 'apply') {
+    appliedLanguage = language.selectedIndex;
+    updateResults();
+  }
+  trigger?.focus();
+});
+</script>
+</body>
+</html>

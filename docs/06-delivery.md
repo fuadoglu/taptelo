@@ -2,11 +2,11 @@
 
 ## Work packages
 
-All packages below are pending implementation. Complete in dependency order. For each package, record requirement IDs, touched routes/data, verification commands and results, migrations, operational assumptions and unresolved evidence. The package's tests are part of completion. Keep production promotion out of ordinary development PRs.
+All packages below are pending implementation. The [acceptance traceability map](09-acceptance-fixtures.md#requirement-traceability) bridges package IDs, fixtures and tests. Complete in dependency order. For each package, record requirement IDs, touched routes/data, verification commands and results, migrations, operational assumptions and unresolved evidence. The package's tests are part of completion. Keep production promotion out of ordinary development PRs.
 
 | ID | Deliverable and dependencies | Completion evidence |
 | --- | --- | --- |
-| T01 Foundation | Laravel 13 / PHP 8.4 skeleton, locked dependencies, DB/CI, shared-host public root, web/CLI health, AZ/EN translation configuration, staging profile. | Clean install and migrate on primary DB, web smoke, docs and composer checks. |
+| T01 Foundation | Laravel 13 / PHP 8.4 skeleton, locked dependencies, DB/CI, shared-host public root, web/CLI health, AZ/EN translation configuration, staging profile. | Pass every [foundation acceptance](07-foundation-acceptance.md) command and expected output. |
 | T02 Catalog data | T01. Listings, revisions, identity and username constraints, taxonomy/region/language, typed relationships, local fixtures. | Uniqueness and lifecycle integration tests; CLI seed explicitly disallowed in production. |
 | T03 Moderation and trust | T02. Submission/revision moderation, status tokens, administrator MFA, audit, reports, privacy/takedown flow, outbox. | Approval races, pending isolation, duplicate flows and urgent removal are exercised. |
 | T04 Browse and discovery | T02–T03. SSR public hubs, profiles, saved items, exact and relevant search, locale/country behavior, mobile/desktop UI. | Reviewed relevance fixture suite and responsive/accessibility acceptance tests. |
@@ -34,6 +34,6 @@ All packages below are pending implementation. Complete in dependency order. For
 
 ## First Codex task
 
-Implement **T01 only**. Read the repository instructions and specifications, then scaffold the local application and CI around the selected PHP/MariaDB baseline. Create AGENTS-compatible commands for install, migrations and checks. Verify clean setup and record which checks ran. Use placeholder configuration values and fixture-only identities. Do not create production DNS, admin credentials or provider tokens. Stop at the T01 acceptance boundary and summarize prerequisites for T02.
+Implement **T01 only**. Read the repository instructions and [foundation acceptance contract](07-foundation-acceptance.md), then scaffold the local application and CI around the selected PHP/MariaDB baseline. Create AGENTS-compatible commands for install, migrations and checks. Verify clean setup and record which checks ran. Use placeholder configuration values and fixture-only identities. Do not create production DNS, admin credentials or provider tokens. Stop at the T01 acceptance boundary and summarize prerequisites for T02.
 
 References: [Laravel deployment](https://laravel.com/docs/13.x/deployment) · [Laravel releases](https://laravel.com/docs/13.x/releases) · [Codex repository workflow](https://developers.openai.com/cookbook/examples/codex/iterating-development-workflows-with-codex)

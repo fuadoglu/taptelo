@@ -19,6 +19,8 @@ Provider baseline is HTTP Bot API for approved channel/group metadata plus manua
 
 ## TG03 · Moderation and ongoing health
 
+The [publication contract](08-publication-contract.md) defines the overdue and grace boundaries, and the public outcomes of these decisions.
+
 1. Place submissions in pending with preview provenance and duplicate signals. Rate-limit public submission and report endpoints. Allow editor corrections but require publish authority to approve.
 2. Revalidate destination identity before approval. Record whether identity was API-confirmed or manually observed. Manual-only entries enter a dated manual review queue and cannot be marked automatically API-verified.
 3. Link and image checks run on a schedule. Start with 24 h for prominent listings and 72 h for the rest, plus operator-triggered priority checks. Measure volume/time/rate limits before increasing coverage.

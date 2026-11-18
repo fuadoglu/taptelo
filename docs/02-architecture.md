@@ -30,6 +30,8 @@ Use UTF-8/utf8mb4 and UTC. Use transactions and foreign keys. Make uniqueness en
 
 ## A03 · State and consistency
 
+Use the [publication contract](08-publication-contract.md) as the authority for public policy outputs and visibility-version invariants.
+
 - Submission: pending → approved or rejected. Edits are new pending revisions. Reopening is an explicitly audited action.
 - Publication: draft → published → suspended or removed. Suspended can return to published after review. Removed URLs retain only permissible tombstone information.
 - Health: unverified, healthy, temporarily unavailable, identity mismatch or confirmed unavailable. Search engine observation has its own unknown, indexed and excluded states.

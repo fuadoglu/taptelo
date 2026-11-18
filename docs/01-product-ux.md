@@ -27,6 +27,8 @@ Maintain a reviewed query set in AZ and EN, including Azerbaijani dotted/dotless
 
 ## P04 · Screen contract
 
+See the [wireframe atlas](10-wireframe-atlas.html) for concrete states and the [UX acceptance checkpoints](09-acceptance-fixtures.md#ux-checkpoints).
+
 | Screen | Mobile | Desktop |
 | --- | --- | --- |
 | Browse/search | Compact header with country and menu, full-width search, three tabs, filter button and removable chips, one-column results, bottom navigation | Search in header, three tabs, visible filter rail and a wide result list |

@@ -2,11 +2,15 @@
 
 ## O01 · Shared hosting baseline
 
+Selected production provider: **Mochahost shared hosting**. Target its Linux/cPanel option. The selected plan and account have to pass the preflight below. Record the actual web/CLI PHP and database versions, document root arrangement, Cron frequency and outbound HTTPS reachability before deployment. [Mochahost cPanel hosting](https://mochahost.com/cpanel-hosting)
+
 Preflight confirms PHP 8.4+ with CLI and web versions aligned, PDO MySQL, required Laravel extensions, mbstring, curl, intl and an approved image processing library where needed. Confirm MariaDB 10.11 LTS or integration-tested MySQL 8.4, HTTPS, URL rewriting, document root public/, write access only to intended paths, private config/storage, DB backup and restore, Cron and outbound HTTPS to enabled providers. Composer may run outside production. Configure the host to run the Laravel scheduler every minute where available. A slower supported Cron must pass queue and freshness targets before promotion. Use bounded single-writer runs and observable heartbeats. Cloudflare country headers are optional and trusted only through a verified edge path. Fall back to Global when uncertain. Make edge HTML caching opt-in and prove purge authority before enabling it.
 
 Targets on representative pages: 75 KB maximum compressed first-load HTML + first-party CSS + first-party JS, measuring a cold load. Measure images and ads separately. Mobile field p75 targets are LCP ≤2.5 s, INP ≤200 ms and CLS ≤0.1. Staging performance budgets are tested on real hosting with realistic fixture volume, a cold/hot cache, and recorded device/network/load conditions. Target p95 cached TTFB ≤500 ms and search response ≤500 ms under the agreed hosting load benchmark. Define the benchmark concurrency from a measured host baseline before production. Record any actual failure and tune before launch.
 
 ## O02 · Access and privacy
+
+Use **Taptelo.com** as the public service/operator display name and **info@taptelo.com** as the public contact. No public phone number or street address has been supplied. Keep those fields optional and omit empty values. Before publishing policies, confirm whether the service name also identifies the actual operator and what additional disclosure, if any, applies in the launch jurisdiction. Do not infer a company registration from the domain. [GDPR, Article 13](https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng)
 
 Use framework auth, administrator MFA, role-based authorization, CSRF protections, session rotation, scoped cookies and a private admin audit trail. Test that public routes and generated artifacts cannot expose pending items, tokens, raw provider payloads or private contact data. Apply bounded content and rate limits, validated link destinations, output escaping and media size/type controls. Use approved-provider-only outbound requests. No arbitrary URL fetch. Keep secrets in host configuration with restricted access. Backups are encrypted and access-controlled.
 
@@ -28,9 +32,9 @@ Monitor HTTPS/5xx, queue backlog and age, cron last success, Telegram error and 
 
 | Input | Owner decision or evidence | Blocks |
 | --- | --- | --- |
-| Operator identity and jurisdiction | Legal entity or operator name, registration country, public contact, target launch markets and review of legal text/retention | Public production launch |
-| Domain and hosting | Registered domain under operator control, shared-host provider/plan and preflight result | Deployment, DNS/TLS and search-property verification |
-| Telegram access | Approved operator-owned Bot API credential outside Git, sample permissions and redistribution scope. Optional MTProto policy and evidence if ever enabled. | Live automatic metadata only |
+| Operator identity and jurisdiction | Public display: Taptelo.com. Public contact: info@taptelo.com. Confirm the actual operator and applicable disclosure with the launch jurisdiction and target markets, and verify mailbox delivery before publishing legal pages. | Final legal pages and public production launch |
+| Domain and hosting | taptelo.com and Mochahost shared hosting selected. Verify domain control and run preflight on the actual plan. | Deployment, DNS/TLS and search-property verification |
+| Telegram access | Optional. For live automatic enrichment, create a dedicated Taptelo bot via BotFather, store its token only in server configuration, and verify approved sample capabilities and redistribution scope. The site can launch with manual review and direct public links while the provider is disabled. | Live automatic metadata only |
 | Editors and editorial seed | Administrator account and MFA, moderation owner, real approved listings in priority topics, reviewed AZ/EN copy | Public production launch |
 | Ads and search providers | Verified search properties and operator accounts. Paid creative and consent config where relevant. | External measurements and monetization |
 
